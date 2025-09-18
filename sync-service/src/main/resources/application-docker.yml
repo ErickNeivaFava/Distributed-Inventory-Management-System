@@ -1,0 +1,60 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: sync-service
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: sync-service
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      missing-topics-fatal: false
+
+  datasource:
+    url: jdbc:sqlite:/data/sync.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.SQLiteDialect
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:admin123@eureka-server:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+
+sync:
+  schedule:
+    enabled: true
+    fixed-rate: 300000 # 5 minutes
+    initial-delay: 10000 # 10 seconds
+  retry:
+    max-attempts: 3
+    backoff-delay: 1000
+
+logging:
+  level:
+    com.mercadolibre.sync: INFO
+    org.springframework.kafka: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics
+  endpoint:
+    health:
+      show-details: always
