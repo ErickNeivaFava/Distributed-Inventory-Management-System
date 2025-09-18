@@ -205,8 +205,8 @@ Each service has its own `application.yml` with service-specific configurations:
 
 ### 1. Clone Repository
 ```bash
-git clone <repository-url>
-cd inventory-system-v2
+git clone https://github.com/ErickNeivaFava/Distributed-Inventory-Management-System
+cd Distributed-Inventory-Management-System
 ```
 
 ### 2. Start Infrastructure
@@ -228,7 +228,7 @@ mvn clean install
 
 #### Run Eureka Server
 ```bash
-cd sync-service
+cd eureka-service
 mvn spring-boot:run -Dspring-boot.run.main-class=com.mercadolibre.sync.EurekaServerApplication
 ```
 
