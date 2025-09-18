@@ -205,8 +205,8 @@ Each service has its own `application.yml` with service-specific configurations:
 
 ### 1. Clone Repository
 ```bash
-git clone <repository-url>
-cd inventory-system-v2
+git clone https://github.com/ErickNeivaFava/Distributed-Inventory-Management-System
+cd Distributed-Inventory-Management-System
 ```
 
 ### 2. Start Infrastructure
